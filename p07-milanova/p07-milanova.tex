@@ -1,0 +1,158 @@
+\documentclass[a4paper,UKenglish]{darts-v2018}
+ 
+\usepackage{microtype}
+
+\bibliographystyle{plainurl}
+
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+
+\newcommand{\orcid}[1]{\url{http://orcid.org/#1}}
+\newcommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+\title{Definite Reference Mutability (Artifact)\footnote{This work was partially supported by NSF grant 1319384.}}
+\titlerunning{Definite Reference Mutability (Artifact)} 
+
+\author{Ana Milanova}{Department of Computer Science, Rensselaer Polytechnic Institute\\{110 8th Street, Troy NY, USA}}{milanova@cs.rpi.edu}{}{}
+
+\author{Wei Huang}{Google}{huangwe@google.com}{}{Work done while author was a PhD student at Rensselear Polytechnic Institute.}
+
+\authorrunning{A. Milanova and W. Huang}
+
+\Copyright{Ana Milanova and Wei Huang}
+
+\subjclass{Theory of computation - Abstraction \\  Software and its engineering - Object oriented languages}
+
+\keywords{reference immutability, type inference, CFL-reachability}
+
+\RelatedArticle{Ana Milanova, ``Definite Reference Mutability'', in Proceedings of the 32nd European Conference on Object-Oriented Programming (ECOOP 2018), LIPIcs, Vol.~108, pp.~0:1--0:2, 2018.\newline \url{http://dx.doi.org/10.4230/LIPIcs.xxx.xxx.xxx}}
+
+\Volume{4}
+\Issue{3}
+\Article{1}
+\RelatedConference{32nd European Conference on Object-Oriented Programming (ECOOP 2018), July 19--21, 2018, Amsterdam, Netherlands}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+Related paper ``Definite Reference Mutability'' presents 
+ReM (Re[ference] M[utability]), a type system
+that separates mutable references into (1) definitely mutable, 
+and (2) maybe mutable, i.e., references whose mutability is due to inherent 
+approximation. We have implemented ReM and applied it on a large benchmark 
+suite. Results show that $\approx$ 86\% of mutable references 
+are definitely mutable. 
+
+This article describes the tool artifact from the related paper. The purpose of 
+the article and artifact is to allow researchers to reproduce our results, as well as build new 
+type systems upon our code.
+\end{abstract}
+
+\begin{scope}
+
+In previous work we developed a framework for inference and checking of pluggable types
+~\cite{Huang:2012a, Huang2014Thesis}. Users instantiate the framework with certain 
+parameters to define a type system. The framework takes as input a program (typically only 
+partially annotated or not annotated at all), infers types for all variables and type checks the 
+inferred types. We have instantiated the framework with known type systems and new ones.
+These include classical Ownership types~\cite{Clarke:1998,Huang:2012a}, 
+Universe types~\cite{Dietl:2005,Huang:2012a}, ReIm reference immutability types~\cite{Huang:2012b}, 
+Information flow types for the detection of privacy leaks in Android apps~\cite{Huang2015},
+and AJ types for data centric synchronization~\cite{Vaziri:2010,Dolby:2012,Huang2012FOOL}.
+
+The artifact builds upon this framework. Package \texttt{edu.rpi} is the heart of the framework: it includes
+type annotation utilities, visitors and a generic constraint solver. It is built on top of 
+Soot~\cite{Vallee-Rai1999}. Package \texttt{edu.rpi.reim} contains instantiations of ReIm and ReM. 
+An instantiation introduces type-system-specific type qualifiers, initialization rules and typing rules,
+possibly overriding default rules defined in generic \texttt{InferenceTransformer} in package \texttt{edu.rpi}. 
+For the majority of cases, ReIm and ReM reuse rules from the generic transformer. 
+
+The key purpose of this artifact is to reproduce and validate the claims of the related ECOOP paper.
+In addition, we invite researchers to build new type systems upon our framework.
+
+\end{scope}
+
+\begin{content}
+The artifact package includes:
+
+\begin{itemize}
+\item \texttt{bin} - directory contains compiled code
+\item \texttt{src} - directory contains all source code
+\item \texttt{lib} - directory contains all libraries: \texttt{soot-develop.jar} and \texttt{rt.jar} necessary to compile 
+and run the code. 
+We include the \texttt{rt.jar} from jdk1.7.0\_75 for MacOS. (It can be downloaded from the Oracle
+website: \url{http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html}.) 
+The artifact requires a Java 7 \texttt{rt.jar}. 
+
+\item \texttt{bench} - directory contains all benchmarks from the related paper
+
+\item \texttt{run-tests} - a script that automatically runs tool with benchmarks
+
+\item \texttt{README} - a description of artifact
+
+\end{itemize}
+\end{content}
+
+\begin{getting}
+In addition, the artifact is available at:
+\url{http://www.cs.rpi.edu/~milanova/soot-reim-definite.zip}.
+
+Source code for the framework, including all type systems, is available on 
+GitHub: \url{https://github.com/proganalysis/type-inference}.
+\end{getting}
+
+\begin{platforms}
+
+
+\begin{enumerate}
+\item Mac OS X El Capitan, 2.8 GHz Intel Core i7, 16 GB RAM. Java version 1.8.0\_71.
+\item Ubuntu 16.04.4 LTS, Intel(R) Xeon(R) CPU E5-2660 v3 @ 2.60GHz, 32 GB RAM. Java version 1.8.0\_171.
+\end{enumerate}
+
+The tool runs as is on these platforms using default maximal heap size.
+
+\end{platforms}
+
+\license{The artifact is available under the 3-Clause BSD license. 
+
+Copyright 2018, Ana Milanova and Wei Huang.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided 
+that the following conditions are met:
+
+\begin{enumerate}
+\item Redistributions of source code must retain the above copyright notice, this list of conditions and 
+the following disclaimer.
+
+\item Redistributions in binary form must reproduce the above copyright notice, this list of conditions 
+and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+\item Neither the name of the copyright holder nor the names of its contributors may be used to endorse 
+or promote products derived from this software without specific prior written permission.
+\end{enumerate}
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+}
+
+\mdsum{590b9f9b3160a342dcf2d71abb6c7585}
+
+\artifactsize{120397581 B}
+
+\subparagraph*{Acknowledgements.}
+
+We thank the ECOOP 2018 Artifact Evaluation committee and the ECOOP 2018 Program committee for valuable suggestions,
+and the National Science Foundation for supporting our work under NSF grant 1319384.
+
+\bibliography{p01-milanova}
+
+\end{document}

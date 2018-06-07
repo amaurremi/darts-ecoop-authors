@@ -1,0 +1,161 @@
+\documentclass[a4paper,UKenglish]{darts-v2018}
+%This is a template for producing DARTS artifact descriptions. 
+%for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
+%for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
+% for section-numbered lemmas etc., use "numberwithinsect"
+ 
+\usepackage{microtype}%if unwanted, comment out or use option "draft"
+\usepackage{relsize}
+
+%\graphicspath{{./graphics/}}%helpful if your graphic files are in another directory
+
+%\nolinenumbers to disable line numbers
+
+\bibliographystyle{plainurl}% the recommended bibstyle
+
+% Commands for artifact descriptions
+% Written by Camil Demetrescu and Erik Ernst
+% April 8, 2014
+
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+
+\newcommand{\orcid}[1]{\url{http://orcid.org/#1}}
+\newcommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand{\toolName}{{\smaller\textsc{\text{NoRegrets}}}}
+
+% Author macros::begin %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Type Regression Testing to Detect \mbox{Breaking Changes in Node.js Libraries} (Artifact)}
+%\titlerunning{A Sample DARTS Research Description} %optional, in case that the title is too long; the running title should fit into the top page column
+
+% ARTIFACT: Authors may not be exactly the same as the related scholarly paper, e.g., you may want to include authors who contributed to the preparation of the artifact, but not to the companion paper
+
+\author{Gianluca Mezzetti}{Aarhus University, Denmark}{mezzetti@gmail.com}{}{}
+\author{Anders Møller}{Aarhus University, Denmark}{amoeller@cs.au.dk}{}{}
+\author{Martin Toldam Torp}{Aarhus University, Denmark}{torp@cs.au.dk}{}{}
+
+\authorrunning{G.\ Mezzetti, A.\ Møller, and M.\,T.\ Torp}
+
+\Copyright{Gianluca Mezzetti, Anders Møller and Martin T. Torp}%mandatory, please use full first names. DARTS license for the artifact description is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+\subjclass{Software and its engineering $\rightarrow$ Software libraries and repositories}% mandatory: Please choose ACM 2012 classifications from https://www.acm.org/publications/class-2012 or https://dl.acm.org/ccs/ccs_flat.cfm . E.g., cite as "General and reference $\rightarrow$ General literature" or \ccsdesc[100]{General and reference~General literature}. 
+
+\keywords{JavaScript, semantic versioning, dynamic analysis}% mandatory: Please provide 1-5 keywords
+% Author macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Please provide information to the related scholarly information
+\RelatedArticle{Gianluca Mezzetti, Anders Møller and Martin T. Torp, ``Type Regression Testing to Detect \mbox{Breaking Changes in Node.js Libraries}'', in Proceedings of the 32nd European Conference on Object-Oriented Programming (ECOOP 2018), LIPIcs, Vol.~0, pp.~0:1--0:2, 2018.\newline \url{http://dx.doi.org/10.4230/LIPIcs.xxx.xxx.xxx}}
+
+%Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Volume{4}
+\Issue{3}
+\Article{1}
+\RelatedConference{32nd European Conference on Object-Oriented Programming (ECOOP 2018), July 19--21, 2018, Amsterdam, Netherlands}
+% Editor-only macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This artifact provides an implementation of a novel technique, type regression testing, to automatically determine whether an update of a npm library implementation affects the types of its public interface, according to how the library is being used by other npm packages. Type regression testing is implemented in the tool \toolName{}. A run of \toolName{} is parameterized with a pre-update and post-update version of the library, and it consists of three fully automatic phases. First, \toolName{} fetches a list of clients that depend upon the pre-update library,  and that have a test suite that succeeds on the pre-update version. Second, \toolName{} uses an ECMAScript 6 proxy instrumentation to generate the API model of both the pre-update and post-update libraries, based on observations of how the client test suites interact with the library. Third, the two models are compared, and inconsistencies are reported as type regressions.
+
+This artifact contains the source code and an installation of \toolName{}, with a guide for how to use the tool and reproduce the experimental results presented in the paper. 
+\end{abstract}
+
+% ARTIFACT: please stick to the structure of 7 sections provided below
+
+% ARTIFACT: section on the scope of the artifact (what claims of the paper are intended to be backed by this artifact?)
+\begin{scope}
+%What is the scope of the artifact? What claims of the related scholarly paper are intended to be backed by this artifact?
+    The artifact provides the \toolName{} implementation of the type regressions testing technique used to answer the research questions in the companion paper.
+    Furthermore, \toolName{} is preconfigured such that the experiments from the paper can be replicated easily. 
+\end{scope}
+
+% ARTIFACT: section on the contents of the artifact (code, data, etc.)
+\begin{content}
+The artifact package includes a virtual machine with:
+\begin{itemize}
+    \item A pre-installed version of \toolName{}.
+    \item A guide describing both how to use \toolName{} to reproduce the results from the paper and how new benchmarks can be added to \toolName{}.  
+\end{itemize}
+\end{content}
+
+% ARTIFACT: section containing links to sites holding the
+% latest version of the code/data, if any
+\begin{getting}
+% leave empty if the artifact is only available on the DROPS server.
+% otherwise, provide links to the latest version of the artifact (e.g., on github)
+In addition, the artifact is also available at
+\url{http://brics.dk/noregrets}.
+\end{getting}
+
+% ARTIFACT: section specifying the platforms on which the artifact is known to
+% work, including requirements beyond the operating system such as large
+% amounts of memory or many processor cores
+\begin{platforms}
+    The artifact works on any platform that can run a VirtualBox VM, including, Windows, Mac and Linux.
+    We recommend that the VM is run with at least 12GB of memory.
+    Otherwise, \toolName{} may fail with out-of-memory exceptions for some benchmarks.
+    At least 30GB of free space is also required.
+% Please specify the platforms on which the artifact is known to
+% work, including requirements beyond the operating system such as large
+% amounts of memory or many processor cores.
+\end{platforms}
+
+% ARTIFACT: section specifying the license under which the artifact is
+% made available
+\license{The artifact is available under Apache License 2.0.}
+
+% ARTIFACT: section specifying the md5 sum of the artifact master file
+% uploaded to the Dagstuhl Research Online Publication Server, enabling 
+% downloaders to check that the file is the expected version and suffered 
+% no damage during download.
+\mdsum{e2b883f996f10ebe7475722093e40061}
+
+% ARTIFACT: section specifying the size of the artifact master file uploaded
+% to the Dagstuhl Research Online Publication Server
+\artifactsize{6.2 GB}
+
+%\subparagraph*{Acknowledgements.}
+%
+%I want to thank \dots 
+
+% ARTIFACT: optional appendix
+\appendix
+\section{Getting started}
+
+The \toolName{} artifact is installed in an OVF virtual machine.
+We recommend opening the VM with VirtualBox,\footnote{\url{https://virtualbox.org/}} but any virtualization software should work.
+Notice, VMware may show a warning but the VM should boot anyway.
+Double click the NoRegrets.ova file to import the VM (about 30GB of free space is required).
+Once the VM has started, a browser will automatically open on a page containing a detailed guide of \toolName{}.
+If the browser is closed, you may find the guide at \url{~/NoRegrets/guide/index.html}
+
+VM credentials:
+\begin{itemize}
+    \item Username: noregrets
+    \item Password: noregrets
+\end{itemize}
+% ARTIFACT: include here any additional references, if needed...
+
+%%
+%% Bibliography
+%%
+
+%% Either use bibtex (recommended), 
+
+%\bibliography{darts2018}
+
+%% .. or use the thebibliography environment explicitely
+
+
+
+\end{document}

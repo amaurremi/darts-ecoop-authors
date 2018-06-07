@@ -1,0 +1,25 @@
+Ruleset: 
+	SecretKey
+	...
+	SecureRandom
+	Cipher
+	Signature
+	KeyGenerator
+	...
+	SecretKeyFactory
+
+Findings in Java Class: Crypto.Enc
+  in Method: byte[] encrypt(java.lang.String,javax.crypto.SecretKey)
+    "AES" should be any of AES/{CBC, GCM, PCBC, CTR, CTS, CFB, OFB}
+      @r3 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String)>("AES")
+	Variable r2 of type javax.crypto.SecretKey was not properly generatedKey
+      @virtualinvoke r3.<javax.crypto.Cipher: void init(int,java.security.Key)>(1, r2)
+  in Method: java.lang.String decrypt(byte[],javax.crypto.SecretKey)
+    "AES" should be any of AES/{CBC, GCM, PCBC, CTR, CTS, CFB, OFB}
+      @r3 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String)>("AES")
+
+Findings in Java Class: FileHandler
+  in Method: java.lang.String performEncryption(java.lang.String)
+    Object of type byte[] was not properly randomized
+      @specialinvoke $r4.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>($r6, "AES")
+

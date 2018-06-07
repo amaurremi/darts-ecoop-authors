@@ -1,0 +1,138 @@
+\documentclass[a4paper,UKenglish]{darts-v2018}
+ 
+\usepackage{microtype}%if unwanted, comment out or use option "draft"
+
+\nolinenumbers % to disable line numbers
+
+%\bibliographystyle{plainurl}% the recommended bibstyle
+
+% Commands for artifact descriptions
+% Written by Camil Demetrescu and Erik Ernst
+% April 8, 2014
+
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+
+\newcommand{\orcid}[1]{\url{http://orcid.org/#1}}
+\newcommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+% Author macros::begin %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Legato: An At-Most-Once Analysis with Applications to Dynamic Configuration Updates (Artifact)\footnote{This work was partially supported under DARPA agreement number FA8750-16-2-0032.}}
+%\titlerunning{A Sample DARTS Research Description} %optional, in case that the title is too long; the running title should fit into the top page column
+
+% ARTIFACT: Authors may not be exactly the same as the related scholarly paper, e.g., you may want to include authors who contributed to the preparation of the artifact, but not to the companion paper
+\author{John Toman}{Paul G. Allen School of Computer Science \& Engineering, University of
+Washington, USA}{jtoman@cs.washington.edu}{}{}{}
+\author{Dan Grossman}{Paul G. Allen School of Computer Science \& Engineering, University of
+  Washington, USA}{djg@cs.washington.edu}{}{}{}
+\authorrunning{J. Toman and D. Grossman}
+\Copyright{John Toman and Dan Grossman}
+
+\subjclass{\ccsdesc[500]{Software and its engineering~Automated static analysis}}
+
+\keywords{Static Analysis, Dynamic Configuration Updates}
+% Author macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Please provide information to the related scholarly information
+\RelatedArticle{John Toman and Dan Grossman, ``Legato: An At-Most-Once Analysis with Applications to Dynamic Configuration Updates'', in Proceedings of the 32nd European Conference on Object-Oriented Programming (ECOOP 2018), LIPIcs, Vol.~109, pp.~24:1--24:31, 2018.\newline \url{http://dx.doi.org/10.4230/LIPIcs.ECOOP.2018.24}}
+
+%Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Volume{4}
+\Issue{3}
+\Article{1}
+\RelatedConference{32nd European Conference on Object-Oriented Programming (ECOOP 2018), July 19--21, 2018, Amsterdam, Netherlands}
+% Editor-only macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  This artifact supports Legato, an at-most-once analysis. An
+  at-most-once analysis ensures that an application never observes
+  inconsistent versions of its environment by checking that every
+  value depends on at most one access of every external resource used
+  by the application. We have applied this general analysis to the
+  problem of finding errors in applications that support dynamic
+  configuration updates (DCU), i.e., configuration updates that are
+  applied immediately without program restart. When configurations may
+  change at any point during execution, the enforcing the at-most-once
+  condition for each configuration option guarantees that the program
+  never observes inconsistent versions of configuration options. This
+  artifact recreates our experiments, which applied Legato to 10
+  applications that support DCU and found several bugs across 9 of the
+  10 programs.
+\end{abstract}
+
+% ARTIFACT: section on the scope of the artifact (what claims of the paper are intended to be backed by this artifact?)
+\begin{scope}
+  This artifact is intended to be used to reproduce the experiments in
+  the companion paper.  in particular, this artifact includes the
+  infrastructure to support the following claims in the paper:
+  \begin{itemize}
+  \item Legato finds dynamic resource consistency errors in our
+    benchmark suite with a manageable ratio of true to false positives.
+  \item Legato has reasonable time and memory requirements.
+  \end{itemize}
+
+  In particular, this artifact can reproduce Tables 1 and 2, and
+  Figures 12--15. In addition, the artifact can reproduce statistics
+  reported in the paper, such as peak memory usage. Claim 1 is
+  supported by Table 2 and Figures 12--14, and Claim 2 is supported by
+  Figure 15 and the statistics computed by the artifact.
+\end{scope}
+
+% ARTIFACT: section on the contents of the artifact (code, data, etc.)
+\begin{content}
+The artifact package includes:
+\begin{itemize}
+\item A README PDF describing how to setup to the artifact and
+  recreate the experiments in the paper.
+\item A user guide (found in \texttt{doc/}) describing how to run
+  Legato on other programs besides those in the paper.
+\item A virtual machine image (found in \texttt{vm/}) that contains
+  all of the infrastructure required to recreate the experiments in the paper.
+\end{itemize}
+\end{content}
+
+% ARTIFACT: section containing links to sites holding the
+% latest version of the code/data, if any
+\begin{getting}
+The source of Legato is also available at \url{https://github.com/uwplse/legato}.
+\end{getting}
+
+% ARTIFACT: section specifying the platforms on which the artifact is known to
+% work, including requirements beyond the operating system such as large
+% amounts of memory or many processor cores
+\begin{platforms}
+  The core of the artifact is contained in a virtual machine,
+  which is provided in the Open Virtualization Archive format.
+  This format should work with any modern virtualization software,
+  and has been tested with VirtualBox 5.1.34 running on Ubuntu 16.04.
+  The virtual machine requires at least 10GB of physical RAM,
+  7GB of hard drive space, and a processor with 2 physical cores for the
+  virtual machine.
+\end{platforms}
+
+% ARTIFACT: section specifying the license under which the artifact is
+% made available
+\license{The artifact is available under the MIT License.}
+
+% ARTIFACT: section specifying the md5 sum of the artifact master file
+% uploaded to the Dagstuhl Research Online Publication Server, enabling 
+% downloaders to check that the file is the expected version and suffered 
+% no damage during download.
+\mdsum{618a2a99707f1b283b2dd01abe0b68d8}
+
+% ARTIFACT: section specifying the size of the artifact master file uploaded
+% to the Dagstuhl Research Online Publication Server
+\artifactsize{2.67 GiB}
+
+\end{document}

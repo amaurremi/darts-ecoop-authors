@@ -1,0 +1,110 @@
+\documentclass[a4paper,UKenglish]{darts-v2018}
+ 
+\usepackage{microtype}
+
+
+\bibliographystyle{plainurl}
+
+
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+
+\newcommand{\orcid}[1]{\url{http://orcid.org/#1}}
+\newcommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+\title{ContextWorkflow: A Monadic DSL for Compensable and Interruptible Executions (Artifact)}
+
+
+\author{Hiroaki Inoue}{Graduate School of Informatics, Kyoto University, Kyoto, Japan}{hinoue@fos.kuis.kyoto-u.ac.jp}{}{The current affiliation is Mitsubishi Electric Corporation.}
+\author{Tomoyuki Aotani}{School of Computing, Tokyo Institute of Technology, Tokyo, Japan}{aotani@c.titech.ac.jp}{}{}
+\author{Atsushi Igarashi}{Graduate School of Informatics, Kyoto University, Kyoto, Japan}{igarashi@kuis.kyoto-u.ac.jp}{}{}
+
+\authorrunning{H. Inoue, T. Aotani and A. Igarashi}
+\Copyright{Hiroaki Inoue, Tomoyuki Aotani and Atsushi Igarashi}
+
+\subjclass{
+\ccsdesc[500]{Software and its engineering~Domain specific languages}
+}
+
+\keywords{workflow, asynchronous exception, checkpoint, monad, embedded
+  domain specific language}
+
+
+\RelatedArticle{H. Inoue, T. Aotani and A. Igarashi, ``ContextWorkflow: A Monadic DSL for Compensable and Interruptible Executions'', in Proceedings of the 32nd European Conference on Object-Oriented Programming (ECOOP 2018), LIPIcs, Vol.~0, pp.~2:1--2:30, 2018.\newline \url{http://dx.doi.org/10.4230/LIPIcs.ECOOP.2018.2}}
+
+\Volume{4}
+\Issue{3}
+\Article{1}
+\RelatedConference{32nd European Conference on Object-Oriented Programming (ECOOP 2018), July 19--21, 2018, Amsterdam, Netherlands}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  This artifact provides the Scala, Haskell, and Purescript
+  implementations of ContextWorkflow, an embedded domain-specific
+  language for interruptible and compensable executions, and
+  demonstrates the maze search example described in the companion
+  paper. The Haskell and Purescript implementations provide the core
+  language constructs including \texttt{checkpoint} for partial aborts
+  and \texttt{sub} for sub-workflows and show that ContextWorkflow can
+  be embedded in eager and lazy languages as described in the
+  companion paper. The Scala implementation does not only provide
+  user-friendly syntax of ContextWorkflow but also gives the maze
+  search example as an interactive GUI application.
+ \end{abstract}
+
+ \begin{scope}
+   The artifact is designed to support the feasibility of (1) our
+   monadic embedding of ContextWorkflow to eager and lazy languages
+   and (2) the maze search example given in the companion paper.
+\end{scope}
+
+\begin{content}
+The artifact package includes:
+\begin{itemize}
+\item A virtual machine image \texttt{ContextWorkflow.ova} that
+  contains under \texttt{/home/cworkflow/contextworkflow}
+  \begin{itemize}
+  \item Scala, Haskell, and Purescript implementations of
+    ContextWorkflow with tiny test programs
+  \item The maze search robot simulator with GUI
+  \end{itemize}
+\item A zip archive \texttt{cw-sources.zip} that contains the source
+  code of the three implementations
+\item A document \texttt{artifact.pdf} that provides instructions for
+  running the implementations
+\item The md5 sums of the three files
+\end{itemize}
+\end{content}
+
+\begin{getting}
+\end{getting}
+
+\begin{platforms}
+  The artifact disk image is known to work on any platform running
+  Oracle VirtualBox version 5 (\url{https://www.virtualbox.org/}) with
+  5 GiB of free disk space and 2 GiB of free RAM.
+\end{platforms}
+
+\license{The artifact is available under MIT license.}
+
+\mdsum{5cbb66a47d17e765b82d738e5532c951}
+
+\artifactsize{3.6 GiB}
+
+\subparagraph*{Acknowledgements.}
+
+We thank the kind and patient reviewers of the artifact for their helpful comments. 
+
+
+\end{document}

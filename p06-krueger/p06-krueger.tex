@@ -1,0 +1,98 @@
+\documentclass[a4paper,UKenglish]{darts-v2018}
+\usepackage{xspace}
+
+% RQs
+\newcommand{\RQ}[1]{\textbf{RQ#1}\xspace} % research questions
+% shorthands
+\newcommand{\TOOLSA}{\textsc{CogniCrypt}$_{\textit{\textsc{sast}}}$\xspace}
+\newcommand{\rulescc}{\textsc{Ruleset}$_{\textit{\textsc{full}}}$\xspace}		
+\newcommand{\rulescl}{\textsc{Ruleset}$_{\textit{\textsc{cl}}}$\xspace}		
+\newcommand{\code}[1]{\texttt{#1}}
+
+\begin{document}
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{CrySL: An Extensible Approach to Validating the Correct Usage of Cryptographic APIs (Artifact)}
+
+
+% author names and affiliations
+% use a multiple column layout for up to two different
+% affiliations
+\author{Stefan Kr{\"u}ger}{Paderborn University, Germany}{firstname.lastname@uni-padeborn.de}{}{}
+\author{Johannes Sp{\"a}th}{Fraunhofer IEM, Germany}{johannes.spaeth@iem.fraunhofer.de}{}{}
+\author{Karim Ali}{University of Alberta, Canada}{karim.ali@ualberta.ca}{}{}
+\author{Eric Bodden}{Paderborn University, Germany}{firstname.lastname@uni-padeborn.de}{}{}
+\author{Mira Mezini}{Technische Universit\"{a}t Darmstadt, Germany}{mezini@cs.tu-darmstadt.de}{}{}
+
+\authorrunning{S. Kr{\"u}ger and J. Sp{\"a}th and K. Ali and E. Bodden and M. Mezini}
+
+\Copyright{Stefan Kr{\"u}ger and Johannes Sp{\"a}th and Karim Ali and Eric Bodden and Mira Mezini}
+
+\keywords{cryptography, domain-specific language, static analysis}
+\subjclass{\ccsdesc[300]{Security and privacy~Software and application security}, 
+\ccsdesc[300]{Software and its engineering~Software defect analysis}, 
+\ccsdesc[300]{Software and its engineering~Syntax \& Semantics}}
+
+\RelatedConference{32nd European Conference on Object-Oriented Programming (ECOOP 2018), July 19--21, 2018, Amsterdam, Netherlands}
+
+\maketitle
+
+\begin{abstract}
+In this artefact, we present CrySL, an extensible approach to validating the
+correct usage of cryptographic APIs. The artefact contains executables
+for \TOOLSA, the analysis CrySL-based analysis, along with the CrySL rules we used in in the original paper's experiments. We also provide scripts to re-run the experiments. We finally include a tutorial to showcase the \TOOLSA on a small Java target program.
+\end{abstract}
+
+%####################################
+
+\section{Scope}\label{sec:scope}
+The artefact is supposed to support repeatability of the experiments in the original paper on a much smaller scale. In particular, it is designed such that the analysis \TOOLSA may be applied to some of the apps we used in our evaluation. Lastly, it facilitates running \TOOLSA on arbitrary Android and Java applications.
+
+\section{Content \& Usage}\label{sec:content}
+The artefact is a docker container that provides the \TOOLSA analysis, as well as the rule sets used for RQ2 and RQ4. We provide the full analysis including a version specifically built to analyse Android apps as well as the CrySL rules from our evaluation. We also provide a few test apps for the analysis, but have significantly reduced their number compared to the original paper because the full analysis takes several days to run even on a 16 core machine with 64 GB RAM.
+
+To set up the docker container, please first download the file called \emph{crysl-artefact} from the location given in Section \ref{sec:getting}. The file is a raw docker image that first needs to be imported into the local docker installation before it can be launched. To this end, execute the commands in the directory with the \emph{crysl-artefact} file.
+\begin{lstlisting}[language=bash, numbers=none, breaklines=true]
+docker import crysl-artefact
+docker run -ti -v $absolute/Path/on/your/host/system:/home/output $hash_of_image /bin/bash
+\end{lstlisting}
+The first command imports the image within the file. The \emph{docker run} command launches a container for the image. The \emph{ti} option sets up a shell in the container and automatically connects to it. The -v option creates a shared volume between container and host system. The folder \emph{/home/output} has already been set up, but a directory on the host system needs to be selected that should serve as the shared volume (see \$absolute/Path/on/your/host/system). The directory is used to store the analysis results, facilitating their inspection from the host system. Following that, one needs to specify the image ID, which one can get by executing \code{docker images} and then taking the ID of the most recently added image, as well as the initial command \emph{/bin/bash} to set up and launch the shell in the container.
+
+When running the docker \emph{run} command, the docker container launches at \emph{/}. Navigate to \emph{/home}, in which one may find three folders. First, there is the previously discussed \emph{output} folder, next to the folders \emph{JavaAnalysis} and \emph{AndroidAnalysis}. Folder \emph{JavaAnalysis} contains a small Java example for the analysis that serves as a tutorial to the artefact and which we describe further in section \ref{subsec:tut}. Lastly, folder \emph{AndroidAnalysis} contains the tools and data to reproduce our results.
+
+\subsection{Java Tutorial} \label{subsec:tut}
+In the \emph{JavaAnalysis} directory, one may find several files that all relate to the analysis. First, the \emph{CryptoAnalysis.jar} comprises the \TOOLSA analysis itself. It further contains the target project \emph{FileEncryptor}. The project implements a simple file encryption, but contains a few bugs \TOOLSA picks up. Finally, the directory \emph{CryslRules} contains the full \rulescc rule set, both as binaries and in textual form. The latest version of the rules are available at \url{https://github.com/CROSSINGTUD/Crypto-API-Rules}. To execute the analysis on the target project, we provide the two scripts \emph{runStdOutAnalysis.sh} and \emph{runFileOutAnalysis.sh}. They can be executed as follows:
+\begin{lstlisting}[language=bash, numbers=none]
+./runFileOutAnalysis.sh
+\end{lstlisting}
+The former prints the analysis report to the console, the latter stores them in a file in \emph{/home/output/Javareports} (ergo also on the shared folder of the host system). The report file for the tutorial target project is displayed below. The header of the file lists all involved CrySL rules in case the user wishes to check the rule their program violated. The actual findings are grouped by class and further by method name. Each finding contains a short description of the misuse and displays the statement the misuse was found at in Jimple, the intermediate representation the analysis framework Soot~\cite{Vallee-Rai2000} we have built \TOOLSA on operates on. The former is to help the user figure out quickly what they have done wrong and how to fix it, the latter should support them in finding the affected location easily. Applying this structure, the first finding in the report below can be interpreted as ''In method \code{encrypt} of class \code{Crypto.Enc}, the parameter first parameter of the call to \code{Cipher.getInstance()} should not just be \emph{AES} but be extended with one of the elements in the list.'' We suggest the reader to check out the rules in the docker image or online and either introduce more rule violations to the target program or fix the ones \TOOLSA finds in it.
+
+\lstinputlisting[breaklines, numbers=none]{code/report-FileEncryptor.txt}
+
+\subsection{Experiments} \label{subsec:exp}
+
+In the \emph{AndroidAnalysis} folder, one can find all files related to reproducing our experiments. In directory \emph{apps}, we provide a few apps along with the artefact in order to facilitate the execution of the analysis. We direct any readers who wish to re-run the full analysis to AndroZoo~\cite{AllixBKT16} and Section 8 of our paper in which we outline the selection criteria for the apps. In any case, the folder further contains the rule sets  \rulescc in \emph{CogniCryptRules} and \rulescl in \emph{CryptoLintRules}, both in their binary and textual form. We used the \rulescc in answering all research questions, the \rulescl for RQ4 only. As we analyse Android apps, we require platform files for different versions of the Android SDK in \emph{platforms}. On top of that, we also need the Android-aware variant of \TOOLSA \emph{CryptoAnalysis-Android-1.0.0-jar-with-dependencies.jar}. It comes with some wrapper code that deals the Android-specific content of the apk files and uses Flowdroid~\cite{ArztRFBBKTOM14} for call-graph construction. Once that is done, \TOOLSA resumes on the remaining Java code. To launch the analysis, execute one of the two \emph{runCogniCryptRulesAnalysis.sh} or \emph{runCryptoLintRulesAnalysis.sh} scripts, depending on which rule set you want applied. Note that we limit the execution time of the analysis to ten minutes by means of \emph{timeout}. We opted for this solution as the execution time fluctuated heavily between five and 25 minutes on our different testing machines.
+
+The analysis stores its results in \emph{/home/output/Androidreports}. For each app, a report file following the above described structure is created. Additionally, the analysis summarizes the results in a \emph{.csv} file. 
+
+\section{Getting the artefact}\label{sec:getting}
+You may download the artefact at \url{https://uni-paderborn.sciebo.de/s/uLtxYDv3Aafob2L}.
+
+\section{Tested platforms}\label{sec:tested}
+The artefact has been tested with Docker for Windows 10.
+
+\section{License}\label{sec:license}
+The whole artefact licensed under Eclipse Public License (EPL) Version 2.0 (\url{https://www.eclipse.org/legal/epl-2.0/}). This does not hold for the apps we provide along with the artefact. They remain licensed under their own license.
+
+\section{MD5 sum of the artefact}\label{sec:MD5}
+b6c347f79bd437978b1cc8d0c018ba16
+
+\section{Size}\label{sec:size}
+2.0 Gb
+
+%################################################
+
+\bibliographystyle{plainurl}% the recommended bibstyle
+\bibliography{bibfiles/p01-krueger}
+
+\end{document}

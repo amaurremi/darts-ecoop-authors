@@ -1,0 +1,150 @@
+\documentclass[a4paper,UKenglish]{darts-v2018}
+%This is a template for producing DARTS artifact descriptions. 
+%for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
+%for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
+% for section-numbered lemmas etc., use "numberwithinsect"
+ 
+\usepackage{microtype}%if unwanted, comment out or use option "draft"
+
+%\graphicspath{{./graphics/}}%helpful if your graphic files are in another directory
+
+\nolinenumbers %to disable line numbers
+
+\bibliographystyle{plainurl}% the recommended bibstyle
+
+% Commands for artifact descriptions
+% Written by Camil Demetrescu and Erik Ernst
+% April 8, 2014
+
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+
+\newcommand{\orcid}[1]{\url{http://orcid.org/#1}}
+\newcommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+% Author macros::begin %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Dependent Types for Class-based Mutable Objects (Artifact)}
+%\titlerunning{A Sample DARTS Research Description} %optional, in case that the
+% title is too long; the running title should fit into the top page column
+
+% ARTIFACT: Authors may not be exactly the same as the related scholarly paper, e.g., you may want to include authors who contributed to the preparation of the artifact, but not to the companion paper
+
+\author{Joana Campos}{LASIGE, Faculdade de Ciências, Universidade de Lisboa,
+Portugal}{jcampos@lasige.di.fc.ul.pt}{https://orcid.org/0000-0002-2185-8175}{}%mandatory, please use full name; only 1 author per \author macro; first two parameters are mandatory, other parameters can be empty.
+
+\author{Vasco T. Vasconcelos}{LASIGE, Faculdade de Ciências, Universidade de
+Lisboa, Portugal}{vv@di.fc.ul.pt}{https://orcid.org/0000-0002-9539-8861}{}
+
+\authorrunning{J.\,Campos and V.\,T. Vasconcelos} %mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et. al.'
+
+\Copyright{Joana Campos and Vasco T. Vasconcelos}%mandatory, please use full first names. DARTS license for the artifact description is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+\subjclass{CCS $\rightarrow$ Software notations and tools $\rightarrow$  Formal language
+definitions $\rightarrow$ Semantics} % mandatory: Please choose ACM 2012
+% classifications from https://www.acm.org/publications/class-2012 or https://dl.acm.org/ccs/ccs_flat.cfm . E.g., cite as "General and reference $\rightarrow$ General literature" or \ccsdesc[100]{General and reference~General literature}.
+
+\keywords{dependent types, index refinements, mutable objects, type
+systems}% mandatory: Please provide 1-5 keywords
+% Author macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Please provide information to the related scholarly information
+\RelatedArticle{Joana Campos and Vasco T. Vasconcelos, ``Dependent Types for
+Class-based Mutable Objects'', in Proceedings of the 32nd European Conference on
+Object-Oriented Programming (ECOOP 2018), LIPIcs, Vol.~109, pp.~13:1--13:25,
+2018.\newline \url{http://dx.doi.org/10.4230/LIPIcs.ECOOP.2018.13}}
+
+%Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Volume{4}
+\Issue{3}
+\Article{1}
+\RelatedConference{32nd European Conference on Object-Oriented Programming (ECOOP 2018), July 19--21, 2018, Amsterdam, Netherlands}
+% Editor-only macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This artifact is based on DOL, a Dependent Object-oriented Language
+featuring dependent types, mutable objects and class-based inheritance with
+subtyping. The typechecker written in Xtend, a flexible and expressive
+dialect of Java, is a direct implementation of the algorithmic type system
+described in the companion paper. It uses a direct interface to Z3 theorem
+prover via its API for Java. The artifact ships with an IDE developed as an
+Eclipse plugin based on the Xtext framework.
+ \end{abstract}
+
+% ARTIFACT: please stick to the structure of 7 sections provided below
+
+% ARTIFACT: section on the scope of the artifact (what claims of the paper are intended to be backed by this artifact?)
+\begin{scope}
+To attest the relevance of the formal language given in the companion paper, we
+provide a fully functional prototype where the examples in the paper as well as
+other programs can be typechecked, compiled and run. The artifact ships with an
+IDE developed as an Eclipse plugin based on the Xtext framework. The IDE
+support includes: a code editor assistant for DOL programs, on-the-fly error
+checking, and target code generation in the form of Java classes. Note that the
+prototype lacks some useful features. For example, DOL does not come with
+strings, and some constructs, such as the \lstinline|while| loop, are
+available, but have limited usefulness. For an online web interface running on
+the command line with no installation required, see \url{http://rss.di.fc.ul.pt/tools/dol/}.
+\end{scope}
+
+% ARTIFACT: section on the contents of the artifact (code, data, etc.)
+\begin{content}
+The artifact package includes:
+\begin{itemize}  
+  \item \lstinline|dol.ova|: the virtual machine image that has 
+  \lstinline|Ubuntu 15.10 Wily| as guest operating system with all the software
+  required to run DOL already installed.
+  \item \lstinline|ArtifactOverView.pdf|: a description of how to run the
+  virtual machine image, the Eclipse IDE, and the examples.
+  \item \lstinline|ThirdPartySoftware.txt|: a description of third-party
+  software included in the DOL bundle.
+\end{itemize}
+\end{content}
+
+% ARTIFACT: section containing links to sites holding the
+% latest version of the code/data, if any
+\begin{getting}
+% leave empty if the artifact is only available on the DROPS server.
+% otherwise, provide links to the latest version of the artifact (e.g., on github)
+In addition, the artifact is also available at:
+\url{http://download.rss.di.fc.ul.pt/dol/dol-v001-artifact.zip}.
+\end{getting}
+
+% ARTIFACT: section specifying the platforms on which the artifact is known to
+% work, including requirements beyond the operating system such as large
+% amounts of memory or many processor cores
+\begin{platforms}
+The artifact is known to work on macOS High Sierra and Windows 10 with at least
+8~GB of free RAM. It should work on any system with the specified RAM, capable
+of running Oracle VirtualBox  5.2.8.
+\end{platforms}
+
+% ARTIFACT: section specifying the license under which the artifact is
+% made available
+\license{The artifact is available under license EPL-1.0
+(\url{https://www.eclipse.org/legal/epl-v10.html}).}
+
+% ARTIFACT: section specifying the md5 sum of the artifact master file
+% uploaded to the Dagstuhl Research Online Publication Server, enabling 
+% downloaders to check that the file is the expected version and suffered 
+% no damage during download.
+\mdsum{d297a4689340e5f6ebac3b9776232b0c}
+
+% ARTIFACT: section specifying the size of the artifact master file uploaded
+% to the Dagstuhl Research Online Publication Server
+\artifactsize{3 GB}
+
+\subparagraph*{Acknowledgements.}
+LASIGE Research Unit, ref. UID/CEC/00408/2013
+
+\end{document}

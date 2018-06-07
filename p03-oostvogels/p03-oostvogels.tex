@@ -1,0 +1,135 @@
+\documentclass[a4paper,UKenglish]{darts-v2018}
+%This is a template for producing DARTS artifact descriptions. 
+%for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
+%for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
+% for section-numbered lemmas etc., use "numberwithinsect"
+ 
+\usepackage{microtype}%if unwanted, comment out or use option "draft"
+
+%\graphicspath{{./graphics/}}%helpful if your graphic files are in another directory
+
+%\nolinenumbers to disable line numbers
+
+\bibliographystyle{plainurl}% the recommended bibstyle
+
+% Commands for artifact descriptions
+% Written by Camil Demetrescu and Erik Ernst
+% April 8, 2014
+
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+
+\newcommand{\orcid}[1]{\url{http://orcid.org/#1}}
+\newcommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+% Author macros::begin %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Static typing of complex presence constraints in interfaces (Artifact)}
+%\titlerunning{A Sample DARTS Research Description} %optional, in case that the title is too long; the running title should fit into the top page column
+
+% ARTIFACT: Authors may not be exactly the same as the related scholarly paper, e.g., you may want to include authors who contributed to the preparation of the artifact, but not to the companion paper
+
+\author{Nathalie Oostvogels}{Vrije Universiteit Brussel, Brussels, Belgium}{noostvog@vub.ac.be}{}{Funded by a PhD Fellowship of the Research Foundation - Flanders (FWO)}
+\author{Joeri De Koster}{Vrije Universiteit Brussel, Brussels, Belgium}{jdekoste@vub.ac.be}{}{}
+\author{Wolfgang De Meuter}{Vrije Universiteit Brussel, Brussels, Belgium}{wdmeuter@vub.ac.be}{}{}
+
+\authorrunning{N. Oostvogels, J. De Koster, W. De Meuter}
+
+\Copyright{Nathalie Oostvogels, Joeri De Koster, and Wolfgang De Meuter}%mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+\Copyright{John Q. Open and Joan R. Access}%mandatory, please use full first names. DARTS license for the artifact description is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+\subjclass{D.3.3 Language Constructs and
+Features, F.3.2 Semantics of Programming Languages, F.3.3 Studies of Program Constructs}% mandatory: Please choose ACM 1998 classifications from http://www.acm.org/about/class/ccs98-html . E.g., cite as "F.1.1 Models of Computation". 
+%\keywords{Dummy keyword -- please provide 1--5 keywords}% mandatory: Please provide 1-5 keywords
+%\keywords{Inter-property constraints, type system, interfaces}
+\keywords{type system, interfaces, dependency logic}% Author macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Please provide information to the related scholarly information
+\RelatedArticle{Nathalie Oostvogels, Joeri De Koster, Wolfgang De Meuter, ``Static typing of complex presence constraints in interfaces'', in Proceedings of the 32nd European Conference on Object-Oriented Programming (ECOOP 2018), LIPIcs, Vol.~109, pp.~14:1--14:27, 2018.\newline \url{http://dx.doi.org/10.4230/LIPIcs.ECOOP.2018.14}}
+
+%Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Volume{4}
+\Issue{3}
+\Article{1}
+\RelatedConference{32nd European Conference on Object-Oriented Programming (ECOOP 2018), July 19--21, 2018, Amsterdam, Netherlands}
+% Editor-only macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This artifact is based on TypeScriptIPC, a statically typed programming language with interfaces in which complex presence constraints can be defined.
+This enables developers to express inter-property constraints on interface properties.
+The need for these inter-property constraints stems from web APIs, which often impose a complex “dependency logic” between properties.
+For example, some properties may be mutually exclusive, or the presence of a property may depend on the presence of others, etc.
+TypeScriptIPC is a variant of TypeScript, in which interfaces are extended to express constraints over multiple properties, using propositional logic.
+This artifact contains documentation on how to build and run TypeScriptIPC, such that the code snippets from the paper can be run.
+\end{abstract}
+
+% ARTIFACT: please stick to the structure of 7 sections provided below
+
+% ARTIFACT: section on the scope of the artifact (what claims of the paper are intended to be backed by this artifact?)
+\begin{scope}
+%What is the scope of the artifact? What claims of the related scholarly paper are intended to be backed by this artifact?
+This artifact provides the necessary materials to run the code snippets from the accompanying paper.
+It contains an implementation of the the programming language TypeScriptIPC, which was presented in ``Static typing of complex presence constraints in interfaces''.
+While the paper contains a programming language that is a \emph{sound subset} of TypeScript, the artifact extends TypeScript in its entirety.
+Soundness remains guaranteed as long as only language constructs from the formalisations in the paper are used. 
+\end{scope}
+
+% ARTIFACT: section on the contents of the artifact (code, data, etc.)
+\begin{content}
+The artifact package includes:
+\begin{itemize}
+\item a VirtualBox image that contains an installed version of TypeScriptIPC;
+\item a PDF (\texttt{Instructions.pdf}) that contains:
+\begin{itemize}
+\item detailed instructions for running TypeScriptIPC programs, as well as shortcuts for running the code snippets found in the tutorial, examples from the paper and tests from the provided test suite;
+\item a tutorial about programming with inter-property constraints;
+\item a list of differences between the formalisation and the implementation;
+\item a mapping of formalisation rules from the paper to procedures in which those rules are implemented.
+\end{itemize}
+\end{itemize}
+\end{content}
+
+% ARTIFACT: section containing links to sites holding the
+% latest version of the code/data, if any
+\begin{getting}
+% leave empty if the artifact is only available on the DROPS server.
+% otherwise, provide links to the latest version of the artifact (e.g., on github)
+In addition, the artifact is also available at:
+\url{https://github.com/noostvog/typescriptipc} (\texttt{aec} branch).
+The instructions accompanying the artifact are also available at \url{http://soft.vub.ac.be/~noostvog/typescriptipc/Instructions.pdf}.
+\end{getting}
+
+% ARTIFACT: section specifying the platforms on which the artifact is known to
+% work, including requirements beyond the operating system such as large
+% amounts of memory or many processor cores
+\begin{platforms}
+The artifact can be installed on any platform running \texttt{node.js} and \texttt{npm} (package manager for \texttt{node.js}: at least version 5.7.1, to support \texttt{npm ci}).
+The provided VirtualBox image (\texttt{.ova}) requires around 1GB of free RAM to run TypeScriptIPC, and 4 GB of free RAM to built TypeScriptIPC as well.
+\end{platforms}
+
+% ARTIFACT: section specifying the license under which the artifact is
+% made available
+\license{The artifact is available under the MIT license.}
+
+% ARTIFACT: section specifying the md5 sum of the artifact master file
+% uploaded to the Dagstuhl Research Online Publication Server, enabling 
+% downloaders to check that the file is the expected version and suffered 
+% no damage during download.
+\mdsum{b47a983b7b1fa9fd070c36863bf83435}
+
+% ARTIFACT: section specifying the size of the artifact master file uploaded
+% to the Dagstuhl Research Online Publication Server
+\artifactsize{3.76 GiB}
+
+\end{document}

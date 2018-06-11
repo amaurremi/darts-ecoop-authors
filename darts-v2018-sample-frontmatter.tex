@@ -1,0 +1,328 @@
+%This is a template for producing the frontmatter of an issue in DARTS.
+
+\documentclass[a4paper,UKenglish]{dartsmaster}
+ %for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
+ %for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
+
+\usepackage{microtype}%if unwanted, comment out or use option "draft"
+\usepackage{wrapfig}
+
+%\editor{John Q. Open \\ Joan R. Access} %optional to modify editors on first page
+
+\EventEditors{Marianna Rapoport, Maria Christakis, and Philipp Haller}
+\EventNoEds{3}
+\EventLongTitle{32nd European Conference on Object-Oriented Programming (ECOOP 2018)}
+\EventShortTitle{ECOOP 2018}
+\EventAcronym{ECOOP}
+\EventYear{2018}
+\EventDate{July 15--21, 2018}
+\EventLocation{Amsterdam, Netherlands}
+\EventLogo{}
+\SeriesVolume{4}
+\SeriesIssue{3}
+\ArticleNo{0} % the frontmatter is always the first paper and has always the article number 0 (zero).
+\DatePublished{July 2018}
+
+
+\begin{document}
+
+\frontmatter
+
+%%
+%% PAGE 1: Cover page
+%%%
+
+\maketitle
+
+%%
+%% PAGE 2: Bibliographic data (editors, ACM classification, ISBN, license, DOI, ...)
+%% 
+
+\begin{publicationinfo}%for page ii, please fill as required
+\sffamily
+\twocolumn
+
+{\Large\bf\sffamily \textbf{\href{http://www.dagstuhl.de/lites}{ISSN \printISSN{}}}}
+
+\bigskip
+
+\newcommand{\orcid}[1]{\url{http://orcid.org/#1}}
+\newcommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+\emph{DARTS Special Issue Editors} \\[0.2cm]
+Marianna Rapoport\\
+University of Waterloo\\
+Waterloo, Canada\\
+\email{mrapoport@uwaterloo.ca}\\
+
+Maria Christakis \\
+Max Planck Institute for Software Systems \\
+Kaiserslautern, Germany\\ 
+\email{maria@mpi-sws.org}\\
+
+Philipp Haller\\
+KTH Royal Institute of Technology\\
+Stockholm, Sweden\\ 
+\email{phaller@kth.se}
+
+\bigskip
+
+\emph{Published online and open access by}\newline
+Schloss Dagstuhl -- Leibniz-Zentrum f\"ur Informatik GmbH, Dagstuhl Publishing, Saarbr\"ucken/Wadern, Germany. 
+
+Online available at \\ \url{http://drops.dagstuhl.de/darts}.
+
+\bigskip
+\emph{Publication date}\newline
+\printDatePublished{}
+
+
+
+\bigskip
+
+%\emph{Bibliographic information published by the Deutsche Nationalbibliothek}\newline
+%The Deutsche Nationalbibliothek lists this publication in the Deutsche Nationalbibliografie; detailed bibliographic data are available in the Internet at \href{http://dnb.d-nb.de}{http://dnb.d-nb.de}. 
+
+\bigskip
+
+\emph{License}\newline
+This work is licensed under a Creative Commons Attribution 3.0 Germany license (CC BY~3.0~DE): \href{http://creativecommons.org/licenses/by/3.0/de/deed.en}{\nolinkurl{http://creativecommons.org/licenses/by/}}\linebreak \href{http://creativecommons.org/licenses/by/3.0/de/deed.en}{\nolinkurl{3.0/de/deed.en}}.
+\begin{wrapfigure}[2]{l}{1.8cm}
+\vspace*{-1\baselineskip}
+\includegraphics[width=1.8cm]{cc-by}
+\end{wrapfigure} 
+In brief, this license authorizes each and everybody to share (to
+copy, distribute and transmit) the work under the following
+conditions, without impairing or restricting the authors'
+moral rights:
+\begin{itemize}
+\item Attribution: The work must be attributed to its authors.
+\end{itemize}
+
+The copyright is retained by the corresponding authors.
+
+%\bigskip
+\vfill
+\emph{Digital Object Identifier}\newline
+\printForewordDOI
+
+\newpage
+
+\vphantom{{\Large\bf\sffamily \textbf{\href{http://www.dagstuhl.de/lites}{ISSN \printISSN{}}}}}~~
+
+\bigskip
+
+\emph{Aims and Scope}\newline
+The Dagstuhl Artifacts Series (DARTS) publishes evaluated research data and artifacts in all areas of computer science. An artifact can be any kind of content related to computer science research, e.g., experimental data, source code, virtual machines containing a complete setup, test suites, or tools.
+
+%\medskip
+
+%\bigskip
+
+%\emph{Editorial Board}
+%\begin{itemize}
+%\item tba
+%\end{itemize}
+\vfill
+
+
+\emph{Editorial Office}\newline
+Michael Wagner \emph{(Managing Editor)}\\
+Jutka Gasiorowski \emph{(Editorial Assistance)}\\
+Dagmar Glaser \emph{(Editorial Assistance)}\\
+Thomas Schillo \emph{(Technical Assistance)}
+
+\bigskip
+\emph{Contact}\newline
+Schloss Dagstuhl -- Leibniz-Zentrum f\"ur Informatik\\
+DARTS, Editorial Office\\
+Oktavie-Allee, 66687 Wadern, Germany\\ 
+publishing@dagstuhl.de
+
+
+\bigskip
+
+\url{http://www.dagstuhl.de/darts}
+ 
+ \thispagestyle{empty}
+ \onecolumn
+
+\newpage
+
+\end{publicationinfo}
+
+%%
+%% PAGE 5 and more: TOC etc.
+%% 
+
+%\begin{dedication}%please fill or comment out
+%  Insert dedication here.
+%\end{dedication}
+
+
+\begin{contentslist}
+%To generate the table of contents copy all the .vtc files
+%of the contributions to your working directory.
+%For every contribution type a line
+%\inputtocentry{dummycontribution}
+%where the argument of \inputtocentry is the name of
+%the vtc file without suffix.
+
+%Alternatively write e.g.
+\contitem
+\title{Preface}
+\author{Marianna Rapoport, Maria Christakis, and Philipp Haller}
+\page{0:vii}
+
+\contitem
+\title{Artifact Evaluation Process}
+\author{ }
+\page{0:ix}
+
+\contitem
+\title{Artifact Evaluation Committee}
+\author{ }
+\page{0:xi}
+
+\contitem
+\title{List of Authors}
+\author{ }
+\page{0:xiii}
+
+%\part{} %use if volume is divided in parts
+\part{Artifacts}
+
+\inputtocentry{darts-v2018-sample-article}
+
+\contitem
+\title{Mmmmm $\ldots$ donuts (Artifact)}
+\author{Homer J. Simpson}
+\page{2:1--2:23}
+
+
+\end{contentslist}
+
+\chapter{Preface} %please fill or comment out
+
+The ECOOP artifact evaluation (AE) considers artifacts, such as software and
+experimental data, associated with a research paper published at ECOOP and
+reviews them independently of the paper. The goal is to independently
+reproduce the results reported in the paper and to provide a reusable tool,
+data set, etc., to the community. The long-term importance of artifacts for
+the research community has been widely accepted, and this year's ECOOP
+follows a sequence of previous artifact evaluations at ECOOP and other
+conferences.
+
+In total, 13 artifacts were submitted for evaluation, i.e., for 50\% of all
+accepted papers. Out of these 13 artifacts, the committee accepted 10, i.e.,
+a 77\% acceptance rate among the submitted artifacts. As a result, 38\% of
+all research papers published at ECOOP 2018 have been successfully artifact
+evaluated.
+
+The effort of creating an artifact is a long-term contribution to the
+research community. To recognize the effort invested by the authors, each
+artifact is archived in the Dagstuhl Artifacts Series (DARTS) published on
+the Dagstuhl Research Online Publication Server (DROPS). Each artifact is
+assigned a DOI, separate from the ECOOP companion paper, allowing the
+community to cite artifacts on their own. Furthermore, all research papers
+accompanied by an artifact show a seal of approval by the AEC on their first
+page.
+
+The quality of the published artifacts depends not only on the authors but
+also on the artifact evaluation committee. This year's committee consisted
+of 20 members, all of which did a great job and invested significant time to
+ensure that artifacts meet their expectations. As the chairs of the artifact
+evaluation committee, we would like to thank all committee members for
+contributing their time and energy. The organization of the evaluation
+process and the publication of the present DARTS issue benefited
+greatly from the advice and experience of previous AEC chairs, in
+particular, \textcolor{red}{Camil Demetrescu, Matthew Flatt, and Tijs van der Storm}. The
+guidelines on artifact evaluation by Shriram Krishnamurthi, Matthias
+Hauswirth, Steve Blackburn, and Jan Vitek published on the Artifact
+Evaluation site (\url{http://www.artifact-eval.org}) were an invaluable resource.
+\textcolor{red}{say something about proof guidelines}
+We are grateful for the assistance of Michael Wagner in the publication of
+the artifacts volume. Finally, we would like to thank the Program Chair
+Todd Millstein for his help ensuring a smooth integration of the review
+process for research papers and the artifact evaluation process. 
+
+\chapter{Artifact Evaluation Process}
+%Editors, please describe your artifact evaluation process in this chapter:
+%\begin{itemize}
+%\item Which parties are involved? 
+%\item How is the relation of the artifact
+%evaluation committee and the regular program committee of the conference?
+%\item How/when are decisions made and synchronized?
+%\end{itemize}
+Authors of a paper accepted to ECOOP 2018 were invited to submit an 
+accompanying artifact. Each submitted artifact was reviewed by at least 
+three members of the artifact evaluation committee. We used a two-phase 
+reviewing process. In the first phase, called ``kick-the-tires'' phase, 
+reviewers checked the documentation and the basic functionality of each 
+artifact and provided feedback to the authors. Next, the authors could 
+respond to this feedback and fix any minor issues, such as missing 
+documentation or other problems that might prevent reviewers from fully 
+using the artifact. Finally, in the second phase, reviewers thoroughly 
+evaluated each artifact. In particular, the reviewers evaluated the quality 
+of the documentation, whether the results reported in the paper could be 
+reproduced by the artifact, and to what extent the artifact can be reused, 
+e.g., for follow-up research.
+
+
+\begin{participants}
+
+\chapter[Committee]{Artifact Evaluation Committee}
+%use \participant for every author, eg.:
+\participant Marianna Rapoport\\
+University of Waterloo\\
+Waterloo, Canada\\
+mrapoport@uwaterloo.ca\\
+
+\participant Maria Christakis \\
+Max Planck Institute for Software Systems \\
+Kaiserslautern, Germany\\ 
+maria@mpi-sws.org\\
+
+\participant Philipp Haller\\
+KTH Royal Institute of Technology\\
+Stockholm, Sweden\\ 
+phaller@kth.se\\
+
+\participant	Alceste Scalas	\\	Imperial College London	\\	London, UK	\\	alceste.scalas@imperial.ac.uk	\\
+
+\participant	Ambrose Bonnaire-Sergeant	\\	Indiana University	\\	Bloomington, IN, USA	\\	abonnairesergeant@gmail.com	\\
+
+\participant	Ezgi Çiçek	\\	MPI-SWS	\\	Saarbruecken, Germany	\\	ecicek@mpi-sws.org	\\
+
+\participant	Fabian Muehlboeck	\\	Cornell University	\\	Ithaca, NY, USA	\\	fabianm@cs.cornell.edu	\\
+
+\participant	Ravichandhran Madhavan	\\	EPFL	\\	Lausanne, Switzerland	\\	ravi.kandhadai@epfl.ch	\\
+
+\participant	Ankush Desai	\\	UC Berkeley	\\	Berkeley, CA, USA	\\	ankush@eecs.berkeley.edu	\\
+
+\participant	Elias Castegren	\\	Uppsala University	\\	Uppsala, Sweden	\\	elias.castegren@it.uu.se	\\
+
+\participant	Emma Tosch	\\	UMass Amherst	\\	Amherst, MA, USA	\\	etosch@cs.umass.edu	\\
+
+\participant	Filip Niksic	\\	MPI-SWS	\\	Kaiserslautern, Germany	\\	fniksic@mpi-sws.org	\\
+
+\participant	Gianluca Mezzetti	\\	Aarhus University	\\	Aarhus, Denmark	\\	mezzetti@cs.au.dk	\\
+
+\participant	Guillaume Martres	\\	EPFL	\\	Lausanne, Switzerland	\\	guillaume.martres@epfl.ch	\\
+
+\participant	Hugo Feree	\\	University of Kent	\\	Kent, UK	\\	H.Feree@kent.ac.uk	\\
+
+\participant	Jon Eyolfson	\\	University of Waterloo	\\	Waterloo, Canada	\\	jonathan.eyolfson@uwaterloo.ca	\\
+
+\participant	Ming-Ho Yee	\\	Northeastern University	\\	Boston, MA, USA	\\	mh@mhyee.com	\\
+
+\participant	Stefan Heule	\\	Stanford University	\\	Stanford, CA, USA	\\	sheule@cs.stanford.edu	\\
+
+\participant	Thomas Gilray	\\	University of Maryland	\\	College Park, MD, USA	\\	thomas.gilray@gmail.com	\\
+
+\participant	Yu Feng	\\	UT Austin	\\	Austin, TX, USA	\\	yufeng@cs.utexas.edu	\\
+
+\end{participants} 
+
+
+\end{document}
